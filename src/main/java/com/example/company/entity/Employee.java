@@ -17,6 +17,7 @@ import java.util.List;
 @EqualsAndHashCode
 @ToString()
 @NoArgsConstructor
+@Setter
 public class Employee implements Serializable {
 
     @Id

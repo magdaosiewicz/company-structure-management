@@ -15,6 +15,7 @@ import java.io.Serializable;
 @EqualsAndHashCode
 @ToString()
 @NoArgsConstructor
+@Setter
 public class Localization implements Serializable{
 
     @Id

@@ -16,6 +16,7 @@ import java.io.Serializable;
 @EqualsAndHashCode
 @ToString()
 @NoArgsConstructor
+@Setter
 public class Department implements Serializable {
 
 

@@ -3,21 +3,17 @@ package com.example.company.rest;
 import com.example.company.DAO.EmployeeDAO;
 import com.example.company.DAO.ProjectDAO;
 import com.example.company.DTO.ProjectDTO;
-import com.example.company.entity.Employee;
 import com.example.company.entity.Project;
 import com.example.company.service.EmployeeService;
 import com.example.company.service.ProjectService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 
 /**
  * Created by Magda on 23.05.2018.
@@ -42,7 +38,7 @@ public class ProjectController {
     @RequestMapping(value = "/add", method = RequestMethod.POST)
     public void addProject(@RequestParam(value = "name") String name, @RequestParam(value = "start") Date startDate, @RequestParam(value = "end") Date endDate, @RequestParam(value = "projectcol") String projectcol) {
 
-      //  List<Employee> empleyees = new ArrayList<>();
+        //  List<Employee> empleyees = new ArrayList<>();
         projectService.addProject(new Project(name, startDate, endDate, projectcol, null));
         //projectDAO.create(new Project(name, startDate, endDate, projectcol, null));
     }
@@ -62,7 +58,7 @@ public class ProjectController {
 
         Project project = projectService.getProject(id);
         project.getEmployeeList().add(employeeService.getEmployee(employeeId));
-         projectService.updateProject(project);
+        projectService.updateProject(project);
     }
 
     @RequestMapping(value = "/deleteEmployee", method = RequestMethod.PUT)
@@ -73,18 +69,17 @@ public class ProjectController {
     }
 
     @RequestMapping(value = "/employeesByProject", method = RequestMethod.GET)
-    public ResponseEntity<?> getAllEmployeesByProject(@RequestParam(value = "project") Long projectId) {
+    public ResponseEntity<?> getAllEmployeesByProject(@RequestParam(value = "project") Long projectId) throws Exception {
         try {
-        //    return projectDAO.getEmplyees(projectId);
-            //List<Employee> employees = new ArrayList<>();
-
-           // return projectService.getProject(projectId).getEmployeeList();
+            if (projectService.getProject(projectId) == null) {
+                throw new Exception("Such a project doesn't exist!");
+            } else if (projectService.getProject(projectId).getEmployeeList().isEmpty()) {
+                throw new Exception("The are no employees in the project!");
+            }
             return ResponseEntity.ok(ProjectDTO.ofProject(projectService.getProject(projectId)).getEmployeeList());
-            // return  projectService.getProject(projectId).setEmployeeList(projectService.getProject(projectId).getEmployeeList());
-        } catch (EmptyResultDataAccessException e) {
-            return null;
+        } catch (Exception e) {
+            throw new Exception("Something went wrong :(");
         }
-
     }
 
 

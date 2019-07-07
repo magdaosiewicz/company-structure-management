@@ -75,18 +75,18 @@ public class EmployeeController {
     }
 
 
-    @RequestMapping(value = "/updateEmployee", method = RequestMethod.PUT)
-    public Employee updateEmployee(@RequestParam(value = "employeeId") Long employeeId, @RequestParam(value = "localizationId") Long localizationId, @RequestParam(value = "department") String departmentName, @RequestParam(value = "email") String email) {
-//        Project updateProject = projectDAO.getProjectById(id);
-//        updateProject.getEmployeeList().add(employeeDAO.getEmployeeById(employeeId));
-//        projectDAO.create(updateProject);
-
-        Employee employee = employeeService.getEmployee(employeeId);
-        employee.setEmai(email);
-        employee.setDepartment(departmentService.getDepartmentByLocalizationIdAndName(localizationId, departmentName));
-
-        return employeeService.updateEmployee(employee);
-    }
+//    @RequestMapping(value = "/updateEmployee", method = RequestMethod.PUT)
+//    public Employee updateEmployee(@RequestParam(value = "employeeId") Long employeeId, @RequestParam(value = "localizationId") Long localizationId, @RequestParam(value = "department") String departmentName, @RequestParam(value = "email") String email) {
+////        Project updateProject = projectDAO.getProjectById(id);
+////        updateProject.getEmployeeList().add(employeeDAO.getEmployeeById(employeeId));
+////        projectDAO.create(updateProject);
+//
+//        Employee employee = employeeService.getEmployee(employeeId);
+//        employee.setEmai(email);
+//        employee.setDepartment(departmentService.getDepartmentByLocalizationIdAndName(localizationId, departmentName));
+//
+//        return employeeService.updateEmployee(employee);
+//    }
 
 
 }

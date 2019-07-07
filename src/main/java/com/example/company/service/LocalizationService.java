@@ -19,6 +19,10 @@ public class LocalizationService {
     private LocalizationRepository localizationRepository;
 
 
+    public Localization getOne(Long id){
+        return localizationRepository.getOne(id);
+    }
+
     public Localization addLocalization (Localization localization) {
         return localizationRepository.save(localization);
     }

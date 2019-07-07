@@ -17,6 +17,7 @@ import java.util.List;
 @Table(name = "PROJECT")
 @EqualsAndHashCode
 @ToString()
+@Setter
 @NoArgsConstructor
 public class Project implements Serializable {
 
